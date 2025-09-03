@@ -143,7 +143,7 @@
             border-bottom: 2px solid #e9ecef;
             font-size: 1.8rem;
         }
-         h3 {
+        h3 {
             color: #00338D;
             margin-top: 25px;
             margin-bottom: 15px;
@@ -239,7 +239,7 @@
             margin-bottom: 5px;
             color: #555;
         }
-         .ref-example {
+        .ref-example {
             background-color: #f1f3f5;
             border-left: 4px solid #00205B;
             padding: 15px;
@@ -348,8 +348,8 @@
         </nav>
 
         <main>
-             <!-- Assignment 2 -->
-             <div id="assignment2" class="tab-content active">
+            <!-- Assignment 2 -->
+            <div id="assignment2" class="tab-content active">
                 <h2>Assignment 2: Critical Reading Reflection</h2>
                 <div class="assignment-details">
                     <div class="details-grid">
@@ -381,7 +381,7 @@
                     </p>
 
                     <h3>4. Formatting and Submission Requirements</h3>
-                     <ul>
+                    <ul>
                         <li><strong>File Format:</strong> Submit a single document in .docx or .pdf format.</li>
                         <li><strong>Font:</strong> Use a clear, readable font like Arial or Times New Roman. Font size must not exceed 12 points.</li>
                         <li><strong>Spacing:</strong> 1.5 line spacing.</li>
@@ -396,7 +396,7 @@
                         <p><strong>In-text citation:</strong><br>
                         A common argument is that entrepreneurship is crucial for alleviating poverty (Kuratko, 2016; Urban, 2020).</p>
                     </div>
-                     <div class="ref-example">
+                    <div class="ref-example">
                         <p><strong>Reference List entry:</strong><br>
                         Kuratko, D.F., 2016. <em>Entrepreneurship: Theory, process, and practice.</em> 10th ed. Boston: Cengage Learning.</p>
                     </div>
@@ -404,8 +404,9 @@
                     <p><strong>Plagiarism alert:</strong> This is an individual assignment. Your work will be submitted through Turnitin on clickUP. Ensure you paraphrase ideas into your own words and cite your sources correctly. Direct quotations must be in quotation marks and cited with a page number.</p>
                 </div>
             </div>
-             <!-- Reading Material -->
-             <div id="reading" class="tab-content">
+
+            <!-- Reading Material -->
+            <div id="reading" class="tab-content">
                 <h2>Reading Material</h2>
                 <div class="text-content">
                     <p>Please read the following article before proceeding with the reflective exercises. Click the link to open the article in a new tab.</p>
@@ -414,9 +415,10 @@
                             South Africa is China's 'springboard' into Africa, says President Ramaphosa
                         </a>
                     </p>
-                     <p>Once you have finished reading, proceed to "Part 1: Initial Thoughts" to begin your analysis.</p>
+                    <p>Once you have finished reading, proceed to "Part 1: Initial Thoughts" to begin your analysis.</p>
                 </div>
             </div>
+
             <!-- Part 1: Initial Thoughts -->
             <div id="part1" class="tab-content">
                 <h2>Part 1: Initial Thoughts & Reactions</h2>
@@ -439,6 +441,7 @@
                     </div>
                 </div>
             </div>
+
             <!-- Part 2: Analysis -->
             <div id="part2" class="tab-content">
                 <h2>Part 2: Deconstruct & Analyze</h2>
@@ -461,6 +464,7 @@
                     </div>
                 </div>
             </div>
+
             <!-- Part 3: Evaluation -->
             <div id="part3" class="tab-content">
                 <h2>Part 3: Critically Evaluate</h2>
@@ -483,6 +487,7 @@
                     </div>
                 </div>
             </div>
+
             <!-- Part 4: Synthesis -->
             <div id="part4" class="tab-content">
                 <h2>Part 4: Synthesize & Connect</h2>
@@ -505,15 +510,17 @@
                     </div>
                 </div>
             </div>
+
             <!-- Demo Tab -->
             <div id="demo" class="tab-content">
                 <h2>Demo</h2>
                 <div class="demo-content">
                     <p>Click the button below to access the demo site for this assignment. The demo provides additional examples and resources to help you complete your critical reading reflection.</p>
-                    <button class="demo-btn" onclick="window.open('https://youthunem-c2bmoz.manus.space/', '_blank')">Access Demo</button>
+                    <button class="demo-btn" onclick="window.open('https://unip-web-fhaxlt.manus.space/', '_blank')">Access Demo</button>
                 </div>
             </div>
         </main>
+
         <footer>
             <div class="contact-info">
                 For queries, contact: Dr Oscar Eybers | oscar.eybers@up.ac.za
@@ -534,7 +541,6 @@
                 const filename = `reflection_${part}_response.txt`;
                 downloadAsTxt(responseText, filename);
             } else {
-                // Using a more user-friendly notification instead of alert
                 const button = event.target;
                 const originalText = button.innerText;
                 button.innerText = 'Nothing to download!';
