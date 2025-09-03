@@ -1,0 +1,589 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ALL 124 AcadLit</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        html {
+            scroll-behavior: smooth;
+        }
+        body {
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+            color: #333;
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        header {
+            background: #00205B;
+            color: white;
+            padding: 25px;
+            border-radius: 12px;
+            margin-bottom: 30px;
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            position: relative;
+        }
+        .session-tab {
+            position: absolute;
+            top: 0;
+            left: 20px;
+            background: #FF8200;
+            color: white;
+            padding: 8px 15px;
+            border-radius: 0 0 8px 8px;
+            font-size: 14px;
+            font-weight: bold;
+        }
+        header h1 {
+            margin: 0;
+            font-size: 2.5rem;
+            letter-spacing: 1px;
+        }
+        header p {
+            margin-top: 10px;
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+        nav {
+            display: flex;
+            justify-content: center;
+            background: white;
+            padding: 10px;
+            border-radius: 12px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+        }
+        .nav-btn {
+            background: transparent;
+            border: none;
+            padding: 12px 25px;
+            margin: 5px;
+            cursor: pointer;
+            font-size: 1rem;
+            font-weight: 600;
+            color: #555;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+        .nav-btn:after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 3px;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: #00205B;
+            transition: width 0.3s ease;
+        }
+        .nav-btn:hover {
+            color: #00205B;
+        }
+        .nav-btn.active {
+            color: #00205B;
+        }
+        .nav-btn.active:after {
+            width: 80%;
+        }
+        /* Special style for the new readings button */
+        .nav-btn.readings {
+            color: #28a745; /* Green color to stand out */
+        }
+        .nav-btn.readings:hover {
+            color: #218838; /* Darker green on hover */
+        }
+        .nav-btn.readings:after {
+            background-color: #28a745; /* Green underline when active */
+        }
+        /* Style for the demo button */
+        .nav-btn.demo {
+            color: #9c27b0; /* Purple color to stand out */
+        }
+        .nav-btn.demo:hover {
+            color: #7b1fa2; /* Darker purple on hover */
+        }
+        .nav-btn.demo:after {
+            background-color: #9c27b0; /* Purple underline when active */
+        }
+        main {
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+        }
+        .tab-content {
+            display: none;
+            animation: fadeIn 0.5s;
+        }
+        .tab-content.active {
+            display: block;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        h2 {
+            color: #00205B;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #e9ecef;
+            font-size: 1.8rem;
+        }
+         h3 {
+            color: #00338D;
+            margin-top: 25px;
+            margin-bottom: 15px;
+            font-size: 1.4rem;
+        }
+        .content-section {
+            display: flex;
+            gap: 30px;
+        }
+        .text-content, .response-area, .assignment-details {
+            flex: 1;
+        }
+        .text-content p, .text-content ul, .assignment-details p, .assignment-details ul {
+            margin-bottom: 15px;
+        }
+        .text-content ul, .assignment-details ul {
+            padding-left: 20px;
+        }
+        .text-content strong, .assignment-details strong {
+            color: #00205B;
+        }
+        textarea {
+            width: 100%;
+            min-height: 400px;
+            border: 2px solid #dee2e6;
+            border-radius: 8px;
+            padding: 15px;
+            font-size: 1rem;
+            line-height: 1.6;
+            resize: vertical;
+            transition: border-color 0.3s ease;
+        }
+        textarea:focus {
+            outline: none;
+            border-color: #00205B;
+            box-shadow: 0 0 0 3px rgba(0, 32, 91, 0.1);
+        }
+        .button-group {
+            margin-top: 20px;
+            text-align: right;
+        }
+        .button-group button {
+            background-color: #00205B;
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 1rem;
+            font-weight: 600;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+            margin-left: 10px;
+        }
+        .button-group button:hover {
+            background-color: #00338D;
+            transform: translateY(-2px);
+        }
+        .button-group button:active {
+            transform: translateY(0);
+        }
+        .button-group button.secondary {
+            background-color: #6c757d;
+        }
+        .button-group button.secondary:hover {
+            background-color: #5a6268;
+        }
+        .article-link {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: #00338D;
+            text-decoration: none;
+            border-bottom: 2px solid transparent;
+            transition: all 0.3s ease;
+        }
+        .article-link:hover {
+            border-bottom: 2px solid #00338D;
+            text-shadow: 0 0 8px rgba(0, 51, 141, 0.7);
+        }
+        .details-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin-bottom: 20px;
+            background-color: #f8f9fa;
+            padding: 20px;
+            border-radius: 8px;
+        }
+        .details-grid div {
+            padding: 10px;
+        }
+        .details-grid strong {
+            display: block;
+            margin-bottom: 5px;
+            color: #555;
+        }
+         .ref-example {
+            background-color: #f1f3f5;
+            border-left: 4px solid #00205B;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 4px;
+        }
+        .ref-example p {
+            margin: 0;
+        }
+        footer {
+            text-align: center;
+            padding: 20px;
+            margin-top: 30px;
+            background-color: white;
+            border-top: 1px solid #dee2e6;
+            border-radius: 0 0 12px 12px;
+            box-shadow: 0 -4px 10px rgba(0,0,0,0.05);
+        }
+        #scrollTopBtn {
+            display: none;
+            position: fixed;
+            bottom: 20px;
+            right: 30px;
+            z-index: 99;
+            border: none;
+            outline: none;
+            background-color: #00205B;
+            color: white;
+            cursor: pointer;
+            padding: 10px 15px;
+            border-radius: 50%;
+            font-size: 20px;
+            transition: background-color 0.3s, opacity 0.3s, transform 0.3s;
+        }
+        #scrollTopBtn:hover {
+            background-color: #00338D;
+            transform: translateY(-3px);
+        }
+        .demo-content {
+            text-align: center;
+            padding: 40px 20px;
+        }
+        .demo-content p {
+            margin-bottom: 30px;
+            font-size: 1.1rem;
+        }
+        .demo-btn {
+            background: linear-gradient(135deg, #9c27b0 0%, #7b1fa2 100%);
+            color: white;
+            border: none;
+            padding: 15px 40px;
+            font-size: 1.2rem;
+            font-weight: 600;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(156, 39, 176, 0.3);
+        }
+        .demo-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(156, 39, 176, 0.4);
+        }
+        .demo-btn:active {
+            transform: translateY(0);
+        }
+        @media (max-width: 768px) {
+            .content-section {
+                flex-direction: column;
+            }
+            nav {
+                flex-direction: column;
+                align-items: stretch;
+            }
+            .nav-btn {
+                text-align: center;
+            }
+            header h1 {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="session-tab">ALL 124_Session 1_Week 6</div>
+            <h1>Reflective Reading</h1>
+            <p>An Academic Analysis Tool for EMS</p>
+        </header>
+        <nav>
+            <button class="nav-btn active" onclick="showTab('assignment2')">Assignment 2 Instructions</button>
+            <button class="nav-btn" onclick="showTab('reading')">Reading Material</button>
+            <button class="nav-btn" onclick="showTab('part1')">Part 1: Initial Thoughts</button>
+            <button class="nav-btn" onclick="showTab('part2')">Part 2: Analysis</button>
+            <button class="nav-btn" onclick="showTab('part3')">Part 3: Evaluation</button>
+            <button class="nav-btn" onclick="showTab('part4')">Part 4: Synthesis</button>
+            <!-- New button for Required Assignment 2 Readings -->
+            <button class="nav-btn readings" onclick="window.open('https://oeybers-cpu.github.io/all_124_readings/  ', '_blank')">Required Assignment 2 Readings</button>
+            <!-- New button for Demo -->
+            <button class="nav-btn demo" onclick="showTab('demo')">Demo</button>
+        </nav>
+
+        <main>
+             <!-- Assignment 2 -->
+             <div id="assignment2" class="tab-content active">
+                <h2>Assignment 2: Critical Reading Reflection</h2>
+                <div class="assignment-details">
+                    <div class="details-grid">
+                        <div><strong>Due Date:</strong> 8-15 September 2025</div>
+                        <div><strong>Weight:</strong> 30</div>
+                        <div><strong>Word Count:</strong> 850-1000 words</div>
+                        <div><strong>Submission:</strong> Online via clickUP (Turnitin-enabled)</div>
+                    </div>
+
+                    <h3>1. Overview and Purpose</h3>
+                    <p>This assignment is designed to develop your critical thinking, analytical reading, and academic writing skills. You are required to select one of the key themes identified from our class survey, choose two provided academic articles related to that theme, and write a critical reflection that analyses and synthesises the arguments presented in those texts.</p>
+                    <p>Your response should not be a simple summary but a critical engagement with the ideas, arguments, and evidence presented by the authors.</p>
+                    
+                    <h3>2. Themes and Topics</h3>
+                    <p>Based on your input, you must choose <strong>ONE</strong> of the following seven themes for your reflection. Each theme includes examples of relevant topics to guide your thinking:</p>
+                    <ul>
+                        <li><strong>Theme 1: Unemployment</strong><br>Topics: Youth unemployment, labour-market scarring, skills mismatch, economic policies affecting job creation.</li>
+                        <li><strong>Theme 2: Corruption</strong><br>Topics: Systemic corruption, its impact on economic development and public trust, ethics in leadership and reporting, case studies (e.g., state capture).</li>
+                        <li><strong>Theme 3: Entrepreneurship</strong><br>Topics: Entrepreneurship as a solution to unemployment, barriers to entry, access to capital, financial literacy, innovation in the South African context.</li>
+                        <li><strong>Theme 4: National Dialogue & Governance</strong><br>Topics: Service delivery, political accountability, social cohesion.</li>
+                    </ul>
+                    
+                    <h3>3. Required Readings</h3>
+                    <p>Please select two articles from the list provided in the following link, based on your chosen theme.</p>
+                    <p>
+                        <a href="Critical Reading Reflection - Academic Themes" class="article-link" target="_blank" rel="noopener noreferrer">
+                            Critical Reading Reflection - Academic Themes
+                        </a>
+                    </p>
+
+                    <h3>4. Formatting and Submission Requirements</h3>
+                     <ul>
+                        <li><strong>File Format:</strong> Submit a single document in .docx or .pdf format.</li>
+                        <li><strong>Font:</strong> Use a clear, readable font like Arial or Times New Roman. Font size must not exceed 12 points.</li>
+                        <li><strong>Spacing:</strong> 1.5 line spacing.</li>
+                        <li><strong>Referencing:</strong> You must use the Harvard referencing method.</li>
+                        <li>Each of the two chosen articles must be cited a <strong>minimum of two times</strong> within your text.</li>
+                        <li>All quantitative data (e.g., statistics, percentages, figures) taken from the articles must be cited.</li>
+                        <li>A complete <strong>Reference List</strong> must be included at the end of your document.</li>
+                    </ul>
+
+                    <h3>5. Referencing Example (Harvard)</h3>
+                    <div class="ref-example">
+                        <p><strong>In-text citation:</strong><br>
+                        A common argument is that entrepreneurship is crucial for alleviating poverty (Kuratko, 2016; Urban, 2020).</p>
+                    </div>
+                     <div class="ref-example">
+                        <p><strong>Reference List entry:</strong><br>
+                        Kuratko, D.F., 2016. <em>Entrepreneurship: Theory, process, and practice.</em> 10th ed. Boston: Cengage Learning.</p>
+                    </div>
+
+                    <p><strong>Plagiarism alert:</strong> This is an individual assignment. Your work will be submitted through Turnitin on clickUP. Ensure you paraphrase ideas into your own words and cite your sources correctly. Direct quotations must be in quotation marks and cited with a page number.</p>
+                </div>
+            </div>
+             <!-- Reading Material -->
+             <div id="reading" class="tab-content">
+                <h2>Reading Material</h2>
+                <div class="text-content">
+                    <p>Please read the following article before proceeding with the reflective exercises. Click the link to open the article in a new tab.</p>
+                    <p>
+                        <a href="https://www.cnbc.com/2023/08/24/south-africa-is-chinas-springboard-into-africa-says-president-ramaphosa.html  " class="article-link" target="_blank" rel="noopener noreferrer">
+                            South Africa is China's 'springboard' into Africa, says President Ramaphosa
+                        </a>
+                    </p>
+                     <p>Once you have finished reading, proceed to "Part 1: Initial Thoughts" to begin your analysis.</p>
+                </div>
+            </div>
+            <!-- Part 1: Initial Thoughts -->
+            <div id="part1" class="tab-content">
+                <h2>Part 1: Initial Thoughts & Reactions</h2>
+                <div class="content-section">
+                    <div class="text-content">
+                        <p>Read the provided text and capture your immediate reactions. Don't censor yourself; jot down whatever comes to mind.</p>
+                        <ul>
+                            <li>What are your first impressions of the text?</li>
+                            <li>What feelings or thoughts does it evoke?</li>
+                            <li>Are there any parts that you immediately agree or disagree with?</li>
+                            <li>What questions arise in your mind as you read?</li>
+                        </ul>
+                        <p><strong>Goal:</strong> To capture your unfiltered, initial engagement with the material before deeper analysis begins.</p>
+                    </div>
+                    <div class="response-area">
+                        <textarea id="response1" placeholder="Type your initial thoughts here..."></textarea>
+                        <div class="button-group">
+                            <button onclick="downloadResponse('part1')">Download .txt</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Part 2: Analysis -->
+            <div id="part2" class="tab-content">
+                <h2>Part 2: Deconstruct & Analyze</h2>
+                <div class="content-section">
+                    <div class="text-content">
+                        <p>Now, let's break down the text. Examine its components and how they fit together.</p>
+                        <ul>
+                            <li>What is the author's main argument or thesis?</li>
+                            <li>What evidence or examples does the author use to support their points?</li>
+                            <li>What is the underlying structure of the text? (e.g., problem-solution, cause-effect)</li>
+                            <li>Identify key terms and concepts. Are they clearly defined?</li>
+                        </ul>
+                        <p><strong>Goal:</strong> To understand the text on a structural and logical level.</p>
+                    </div>
+                    <div class="response-area">
+                        <textarea id="response2" placeholder="Type your analysis here..."></textarea>
+                        <div class="button-group">
+                            <button onclick="downloadResponse('part2')">Download .txt</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Part 3: Evaluation -->
+            <div id="part3" class="tab-content">
+                <h2>Part 3: Critically Evaluate</h2>
+                <div class="content-section">
+                    <div class="text-content">
+                        <p>Assess the strengths and weaknesses of the text. This is where you form your academic judgment.</p>
+                        <ul>
+                            <li>Is the author's argument convincing? Why or why not?</li>
+                            <li>Is the evidence provided sufficient, relevant, and credible?</li>
+                            <li>Are there any biases, assumptions, or logical fallacies in the text?</li>
+                            <li>How does this text compare to other works on the same subject?</li>
+                        </ul>
+                        <p><strong>Goal:</strong> To form a critical and informed opinion about the quality and validity of the text.</p>
+                    </div>
+                    <div class="response-area">
+                        <textarea id="response3" placeholder="Type your evaluation here..."></textarea>
+                        <div class="button-group">
+                            <button onclick="downloadResponse('part3')">Download .txt</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Part 4: Synthesis -->
+            <div id="part4" class="tab-content">
+                <h2>Part 4: Synthesize & Connect</h2>
+                <div class="content-section">
+                    <div class="text-content">
+                        <p>Connect the text's ideas to your own knowledge and the broader context of your field.</p>
+                        <ul>
+                            <li>How does this text relate to your own experiences or prior knowledge?</li>
+                            <li>What are the broader implications of the author's argument for your field (EMS)?</li>
+                            <li>How can you apply the insights from this text to your studies or professional practice?</li>
+                            <li>What new questions or avenues for exploration has this text opened up for you?</li>
+                        </ul>
+                        <p><strong>Goal:</strong> To integrate the text's knowledge into your own intellectual framework and professional context.</p>
+                    </div>
+                    <div class="response-area">
+                        <textarea id="response4" placeholder="Type your synthesis here..."></textarea>
+                        <div class="button-group">
+                            <button onclick="downloadResponse('part4')">Download .txt</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Demo Tab -->
+            <div id="demo" class="tab-content">
+                <h2>Demo</h2>
+                <div class="demo-content">
+                    <p>Click the button below to access the demo site for this assignment. The demo provides additional examples and resources to help you complete your critical reading reflection.</p>
+                    <button class="demo-btn" onclick="window.open('https://youthunem-c2bmoz.manus.space/  ', '_blank')">Access Demo</button>
+                </div>
+            </div>
+        </main>
+        <footer>
+             <div id="sfcezr7zy97mrnxca93tnkkrarb6stsj9kw"></div>
+            <script type="text/javascript" src="https://counter5.optistats.ovh/private/counter.js?c=ezr7zy97mrnxca93tnkkrarb6stsj9kw&down=async" async></script>
+            <noscript><a href="  https://www.freecounterstat.com  " title="free counter"><img src="https://counter5.optistats.ovh/private/freecounterstat.php?c=ezr7zy97mrnxca93tnkkrarb6stsj9kw" border="0" title="free counter" alt="free counter"></a></noscript>
+        </footer>
+    </div>
+    
+    <button onclick="scrollToTop()" id="scrollTopBtn" title="Go to top">^</button>
+
+    <script>
+        function downloadResponse(part) {
+            const partNumber = part.replace('part', '');
+            const responseText = document.getElementById(`response${partNumber}`).value;
+            if (responseText.trim() !== '') {
+                const filename = `reflection_${part}_response.txt`;
+                downloadAsTxt(responseText, filename);
+            } else {
+                // Using a more user-friendly notification instead of alert
+                const button = event.target;
+                const originalText = button.innerText;
+                button.innerText = 'Nothing to download!';
+                button.style.backgroundColor = '#dc3545';
+                setTimeout(() => {
+                    button.innerText = originalText;
+                    button.style.backgroundColor = '';
+                }, 2000);
+            }
+        }
+
+        function downloadAsTxt(content, filename) {
+            const blob = new Blob([content], { type: 'text/plain' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = filename;
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            URL.revokeObjectURL(url);
+        }
+
+        function showTab(tabName) {
+            // Hide all tab contents
+            const tabContents = document.getElementsByClassName('tab-content');
+            for (let i = 0; i < tabContents.length; i++) {
+                tabContents[i].classList.remove('active');
+            }
+            // Remove active class from all buttons
+            const tabButtons = document.getElementsByClassName('nav-btn');
+            for (let i = 0; i < tabButtons.length; i++) {
+                tabButtons[i].classList.remove('active');
+            }
+            // Show the specific tab content
+            document.getElementById(tabName).classList.add('active');
+            // Set the corresponding button as active
+            const activeButton = document.querySelector(`.nav-btn[onclick="showTab('${tabName}')"]`);
+            if (activeButton) {
+                activeButton.classList.add('active');
+            }
+        }
+
+        // Scroll to top functionality
+        const scrollTopBtn = document.getElementById("scrollTopBtn");
+
+        window.onscroll = function() {
+            if (document.body.scrollTop > 100 || document.documentElement.scrollTop > 100) {
+                scrollTopBtn.style.display = "block";
+            } else {
+                scrollTopBtn.style.display = "none";
+            }
+        };
+
+        function scrollToTop() {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+    </script>
+</body>
+</html>
